@@ -95,7 +95,8 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
     // Any route not matching an API route should serve index.html (for React Router)
-    app.get('*', (req, res) => {
+    // Express 5 requires named wildcard parameters
+    app.get('/{*splat}', (req, res) => {
         res.sendFile(path.resolve(__dirname, '../frontend', 'dist', 'index.html'));
     });
 } else {
