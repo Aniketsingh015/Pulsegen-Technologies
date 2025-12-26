@@ -11,8 +11,10 @@ const User = require('../models/User');
 // Helper function to generate a JWT token
 // This token is sent to the frontend and stored (e.g., in localStorage)
 // It proves the user's identity for future requests.
+const JWT_SECRET = process.env.JWT_SECRET || 'supersecret123';
+
 const generateToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, {
+    return jwt.sign({ id }, JWT_SECRET, {
         expiresIn: '30d', // Token serves as a "session" for 30 days
     });
 };
